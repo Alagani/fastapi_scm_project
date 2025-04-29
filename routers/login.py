@@ -47,8 +47,7 @@ def login_post(
             })
 
         access_token = create_access_token(
-        data={"sub": user["email"]}, 
-        expires_delta=15
+        data={"sub": user["email"]}
     )
 
         response = RedirectResponse(url="/dashboard", status_code=302)
