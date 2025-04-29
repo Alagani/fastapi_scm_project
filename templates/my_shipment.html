@@ -109,9 +109,6 @@
                                     <thead class="table-primary position-sticky top-0">
                                         <tr>
                                             <th>SNO.</th>
-                                            {% if role == 'admin' %}
-                                            <th>Username</th>
-                                            {% endif %}
                                             <th>Shipment Number</th>
                                             <th>Route</th>
                                             <th>Goods Type</th>
@@ -129,10 +126,7 @@
                                     <tbody id="shipmentTable"
                                         {% for shipment in shipments %}
                                         <tr>
-                                            <td>{{ loop.index }}</td>
-                                            {% if role == 'admin' %}
-                                            <td>{{ username }}</td>
-                                            {% endif %}                                           
+                                            <td>{{ loop.index }}</td>                                           
                                             <td>{{ shipment.shipment_number }}</td>
                                             <td>{{ shipment.route }}</td>
                                             <td>{{ shipment.goods_type }}</td>
