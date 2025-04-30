@@ -90,22 +90,22 @@
 
             <!-- My Shipment Data Start -->
 
-            <div class="container-fluid pt-4 px-4 >
+            <div class="container-fluid pt-4 px-4">
                 <div class="row g-4">
-                    <div class="col-12 bg-white"">
-                        <div class=" p-4" >
+                    <div class="col-12 bg-white d-flex flex-column" style="height: 860px;">
+                        <div class="p-4">
                             <h6 class="mb-4 text-center" style="color: #333; font-size: 1.5rem; font-weight: bold;">My Shipment Data</h6>
-
-                            <!-- Search Input -->
-
+            
+                            <!-- Search -->
                             <div class="mb-3">
-                                <input type="text" id="searchInput" class="form-control" placeholder="Search by Username or Shipment Details" style="background-color: #ffff; border: 1px solid #000; font-size: 1rem; width: 50%; margin: 0 auto;">
+                                <input type="text" id="searchInput" class="form-control"
+                                    placeholder="Search by Username or Shipment Details"
+                                    style="background-color: #ffff; border: 1px solid #000; font-size: 1rem; width: 50%; margin: 0 auto;">
                             </div>
-
-                            <!-- Responsive Table with Scrolling -->
-
-                            <div class="table-responsive table-bordered" style="max-height: 700px; overflow-y: auto;">
-                                <table class="table table-hover text-center align-middle mb-0">
+            
+                            <!-- Table -->
+                            <div class="table-responsive flex-grow-1" style="max-height: 700px;">
+                                <table class="table table-hover table-bordered text-center align-middle mb-0">
                                     <thead class="table-primary position-sticky top-0">
                                         <tr>
                                             <th>SNO.</th>
@@ -123,10 +123,10 @@
                                             <th>Shipment Description</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="shipmentTable"
+                                    <tbody id="shipmentTable">
                                         {% for shipment in shipments %}
                                         <tr>
-                                            <td>{{ loop.index }}</td>                                           
+                                            <td>{{ loop.index }}</td>
                                             <td>{{ shipment.shipment_number }}</td>
                                             <td>{{ shipment.route }}</td>
                                             <td>{{ shipment.goods_type }}</td>
@@ -134,7 +134,7 @@
                                             <td>{{ shipment.po_number }}</td>
                                             <td>{{ shipment.ndc_number }}</td>
                                             <td>{{ shipment.container_number }}</td>
-                                            <td>{{shipment.delivery_number}}</td>
+                                            <td>{{ shipment.delivery_number }}</td>
                                             <td>{{ shipment.device_id }}</td>
                                             <td>{{ shipment.goods_number }}</td>
                                             <td>{{ shipment.batch_id }}</td>
@@ -145,15 +145,19 @@
                                 </table>
                             </div>
                         </div>
+            
+                        <!-- Pagination stays at bottom -->
+                        <div id="pagination" class="text-center py-2 mt-auto"></div>
                     </div>
                 </div>
             </div>
+            
 
             <script src="static/js/my_shipment.js"></script>
                
             </script>
             <!-- My Shipment Data End -->
-
+            
     <!-- Template Javascript -->
     <script src="static/js/main.js"></script>
 </body>
