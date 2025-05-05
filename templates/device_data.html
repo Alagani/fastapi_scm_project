@@ -87,24 +87,26 @@
 
             <div class="container-fluid pt-4 px-4">
                 <div class="row g-4">
-                    <div class="col-12 bg-white">
-                        <div class=" rounded h-100 p-4">
-                            <h6 class="mb-4 text-center" style="color: #0c0b0b; font-size: 1.5rem; font-weight: bold;">Please Select a Device ID to See the Data Stream</h6>
+                    <!-- White container with fixed height & vertical layout -->
+                    <div class="col-12 bg-white d-flex flex-column" style="height: 860px;">
+                        
+                        <!-- Content block that scrolls if needed -->
+                        <div class="rounded p-4" style="flex: 1; overflow-y: auto;">
+                            <h6 class="mb-4 text-center" style="color: #0c0b0b; font-size: 1.5rem; font-weight: bold;">
+                                Please Select a Device ID to See the Data Stream
+                            </h6>
+            
                             <div class="d-flex justify-content-center align-items-center mb-4">
-                                <!-- Device Selection -->
-                                <select class="form-select me-3" id="deviceSelect" style="width: 30%;background-color: #ffff;">
+                                <select class="form-select me-3" id="deviceSelect" style="width: 30%; background-color: #ffff;">
                                     <option value="" selected>Select Device ID</option>
-                                    <option value="4857464850">4857464850</option>
-                                    <option value="4857464851">4857464851</option>
-                                    <option value="4857464852">4857464852</option>
+                                    <option value="1151">1151</option>
+                                    <option value="1152">1152</option>
+                                    <option value="1153">1153</option>
                                 </select>
-
-                                <!-- Search Input -->
-                                <input type="text" id="searchInput" class="form-control" placeholder="Search in table..." style="width: 50%; border: 1px solid #000; font-size: 1rem; background-color: #ffff;">
+                                <button id="getDataBtn" class="btn btn-primary">Get Device Data</button>
                             </div>
-
-                            <!-- Responsive Table -->
-
+            
+                            <!-- Table area -->
                             <div class="table-responsive">
                                 <table class="table table-bordered text-center align-middle" id="deviceDataTable">
                                     <thead class="table-primary">
@@ -119,22 +121,24 @@
                                     <tbody>
                                         {% for device in devices %}
                                         <tr>
-                                            <td>{{ device.device_id }}</td>
-                                            <td>{{ device.battery_level }}</td>
-                                            <td>{{ device.temperature }}</td>
-                                            <td>{{ device.route_from }}</td>
-                                            <td>{{ device.route_to }}</td>
+                                            <td>{{ device.Device_ID }}</td>
+                                            <td>{{ device.Battery_Level }}</td>
+                                            <td>{{ device.First_Sensor_temperature }}</td>
+                                            <td>{{ device.Route_From }}</td>
+                                            <td>{{ device.Route_To }}</td>
                                         </tr>
                                         {% endfor %}
-                                        
                                     </tbody>
                                 </table>
                             </div>
                         </div>
+            
+                        <!-- ✅ Pagination fixed at bottom, outside scrollable section -->
+                        <div id="pagination" class="text-center py-2" style="border-top: 1px solid #ccc;"></div>
                     </div>
                 </div>
             </div>
-
+            
             <!-- Device Data End -->
 
     <!-- Template Javascript -->
