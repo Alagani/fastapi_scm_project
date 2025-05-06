@@ -41,6 +41,7 @@ function attachRoleToggleListeners() {
             const currentRole = this.textContent.trim().toLowerCase();
             const newRole = currentRole === 'admin' ? 'user' : 'admin'; 
 
+            if (confirm('Are you sure you want to update role?')) {
             try {
                 const response = await fetch(`/users/${userEmail}`, {
                     method: 'PUT',
@@ -61,6 +62,7 @@ function attachRoleToggleListeners() {
             } catch (error) {
                 alert(error.message);
             }
+        }
         });
     });
 }
