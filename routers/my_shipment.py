@@ -22,7 +22,6 @@ def my_shipment(request: Request, current_user: dict = Depends(get_current_user)
         
         shipments = []
         for doc in shipments_cursor:
-            doc["_id"] = str(doc["_id"])
             shipments.append(doc)
         
         return templates.TemplateResponse('my_shipment.html', {

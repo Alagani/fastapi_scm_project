@@ -29,7 +29,6 @@ def devicedata(request:Request,current_user: dict = Depends(get_current_user)):
         devices = []
 
         for device in devices_cursor:
-            device["_id"] = str(device.get("_id", ""))
             devices.append(device)
             
         return templates.TemplateResponse('device_data.html',{'request':request,"role":role,'devices':devices,'username': username})

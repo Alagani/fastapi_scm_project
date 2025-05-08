@@ -28,7 +28,6 @@ def users(request: Request, current_user: dict = Depends(get_current_user)):
         users = []
 
         for usr in users_cursor:
-            usr["_id"] = str(usr.get("_id", ""))
             users.append(usr)
         
 
