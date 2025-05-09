@@ -4,10 +4,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-MONGO_URL=os.getenv("MONGO_URL")
+MONGO_URI=os.getenv("MONGO_URI")
 
 
-client =MongoClient(MONGO_URL)
+client =MongoClient(MONGO_URI)
 db = client['scm_database']
 users_data = db['users_data']
 shipment_data = db['shipment_data']
