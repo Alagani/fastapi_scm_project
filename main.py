@@ -2,7 +2,6 @@ from fastapi import FastAPI
 import uvicorn
 from fastapi.staticfiles import StaticFiles
 from routers import login,register, device_data, new_shipment, dashboard, users, my_shipment,logout
-from starlette.status import HTTP_401_UNAUTHORIZED
 from fastapi.templating import Jinja2Templates
 
 app = FastAPI()
