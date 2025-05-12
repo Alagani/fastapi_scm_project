@@ -21,13 +21,83 @@
 
     <!-- Template Stylesheet -->
     <link href="static/css/style.css" rel="stylesheet">
+    <style>
+    body {
+      background: url('your-background-image.png') no-repeat center center fixed;
+      background-size: cover;
+      height: 100vh;
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .welcome-container {
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      /* max-width: 960px; */
+      height: 830px;
+      margin: 24px 24px 20px 24px;
+      width: 97%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .card-custom {
+      background-color: #f8f9fa;
+      border: none;
+      border-radius: 15px;
+      padding: 30px;
+      transition: transform 0.3s ease;
+      text-align: center;
+      width: 80%;
+      max-width: 400px;
+      margin: 15px auto;
+      
+    }
+ 
+    .card-custom:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .btn-custom {
+      border-radius: 30px;
+      padding: 10px 20px;
+      font-weight: 600;
+      min-width: 200px;
+    }
+
+    h1 span {
+      color: #6f42c1;
+    }
+
+    .cards-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 100px;
+    }
+
+    @media (max-width: 768px) {
+      .card-custom {
+        margin-bottom: 20px;
+      }
+    }
+  </style>
 </head>
 
 <body>
         <!-- Sidebar Start -->
 
         <div class="sidebar pe-4 pb-3 d-flex flex-column">
-            <nav class="navbar  flex-grow-1 d-flex flex-column">
+            <nav class="navbar flex-grow-1 d-flex flex-column">
                 <a href="/dashboard" class="navbar-brand mx-4 mb-3 d-flex align-items-center">
                     <img src="static/img/Exafluence.jpg" alt="Exafluence" style="width: 60px; height: 60px; margin-right: 10px;">
                     <h5 class="mb-0" style="color:#473434; font-size: large;">Exafluence</h5>
@@ -40,11 +110,11 @@
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-                    <a href="/dashboard" class=" nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-                    <a href="/my_shipment" class=" nav-link"><i class="fa fa-solid fa-truck me-2"></i>My Shipment</a>
-                    <a href="/new_shipment" class=" nav-link"><i class="fa fa-solid fa-upload me-2"></i>New Shipment</a>
+                    <a href="/dashboard" class="nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                    <a href="/my_shipment" class="nav-link"><i class="fa fa-solid fa-truck me-2"></i>My Shipment</a>
+                    <a href="/new_shipment" class="nav-link"><i class="fa fa-solid fa-upload me-2"></i>New Shipment</a>
                     {% if role == 'admin' %}
-                    <a href="/devicedata" class=" nav-link"><i class="fa fa-database me-2"></i>Device Data</a>
+                    <a href="/devicedata" class="nav-link"><i class="fa fa-database me-2"></i>Device Data</a>
                     <a href="/users" class="nav-link"><i class="fa fa-users me-2"></i>Users</a>
                     {% endif %}
                 </div>
@@ -78,6 +148,25 @@
                 </div>
             </nav>
             <!-- Navbar End -->
+
+
+            <div class="welcome-container text-center">
+                <h1 class="mb-5" style="width: 100%; text-align: center; padding-top: 30px; font-size: 2.5rem; font-weight: bold; color: #6f42c1;">Hi,{{username}} Welcome to SCM</h1>
+                
+                <div class="cards-container" style="display: flex;flex-direction: row;">
+                    <div class="card card-custom">
+                        <p class="mb-3">Create a New Shipment</p>
+                        <a href="/new_shipment" class="btn btn-primary btn-custom">Create Shipment</a>
+                    </div>
+                    
+                    <div class="card card-custom">
+                        <p class="mb-3">To see Device Data Stream.</p>
+                        <a href="/devicedata" class="btn btn-secondary btn-custom">Device Data Stream</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
     <!-- Template Javascript -->
     <script src="static/js/main.js"></script>

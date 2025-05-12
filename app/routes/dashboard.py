@@ -1,10 +1,10 @@
 from fastapi import Request
 from fastapi.templating import Jinja2Templates
 from fastapi import Depends
-from .jwt_handler import get_current_user
+from jwt_handler import get_current_user
 from database import users_data
 from fastapi import APIRouter
-from .cookie_handler import delete_access_token_cookie
+from cookie_handler import delete_access_token_cookie
 
 router = APIRouter()
 
