@@ -20,6 +20,10 @@ def verify_password(plain_password, hashed_password):
     return pwd_context.verify(plain_password, hashed_password)
 
 @router.get('/')
+def landing_page(request:Request):
+    return templates.TemplateResponse('landing_page.html',{'request':request})
+
+@router.get('/register')
 def register(request:Request):
     return templates.TemplateResponse('register.html',{'request':request})
 
