@@ -44,7 +44,7 @@ function createPaginationButtons(visibleRows) {
 
     for (let i = 1; i <= pageCount; i++) {
         const btn = document.createElement("button");
-        btn.className = "btn btn-sm btn-outline-primary mx-1";
+        btn.className = "btn btn-sm btn-light mx-1";
         btn.textContent = i;
         btn.addEventListener("click", () => displayPage(i, currentVisibleRows));
         paginationContainer.appendChild(btn);
@@ -57,8 +57,10 @@ function updatePagination(visibleRows) {
 
 function setActiveButton(activePage) {
     const buttons = document.querySelectorAll("#pagination button");
-    buttons.forEach((btn, index) => {
-        btn.classList.toggle("active", index + 1 === activePage);
+    buttons.forEach(btn => {
+        const isActive = parseInt(btn.textContent) === activePage;
+        btn.classList.toggle("btn-light", isActive);
+        btn.classList.toggle("btn-outline-light", !isActive);
     });
 }
 
