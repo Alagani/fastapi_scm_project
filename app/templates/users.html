@@ -55,20 +55,22 @@
         <a href="#" class="navbar-brand d-flex d-lg-none me-4">
             <img src="static/img/Exafluence.jpg" alt="Exafluence" style="border-radius: 30%; width: 45px; height: 45px; margin-right: 10px;">
         </a>
-        <div class="navbar-nav align-items-center ms-auto">
+        <!-- <div class="navbar-nav align-items-center ms-auto">
             <a href="/my_shipment" class="btn btn-outline-light text-decoration-none me-2">
                 <span class="d-none d-lg-inline-flex fw-bold">My Shipment</span>
             </a>
             <a href="/new_shipment" class="btn btn-outline-light text-decoration-none">
                 <span class="d-none d-lg-inline-flex fw-bold">New Shipment</span>
             </a>
-        </div>
+        </div> -->
     </nav>
 <!-- Navbar End -->
 
 
 <!-- users table start -->
 <div class="container-fluid pt-4 px-4  ">
+    <div id="alert-placeholder"></div>
+
     <div class="row g-4 ">
         <div class="col-12 bg-white">
             <div class="rounded h-100 p-4">
@@ -79,35 +81,40 @@
                 </div>
                 <!-- Responsive Table -->
                 <div class="table-responsive table-bordered" style="max-height: 800px; overflow-y: auto;">
-                    <table class="table table-hover text-center align-middle" id="usersTable">
-                        <thead class="table-primary table-bordered position-sticky top-0">
-                            <tr>
-                                <th>SNo.</th>
-                                <th>Username</th>
-                                <th>Email</th>
-                                <th>Role</th>
-                                <th>Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for user in users %}
-                            <tr data-id="{{ user.id }}">
-                                <td>{{ loop.index }}</td>
-                                <td>{{ user.username }}</td>
-                                <td>{{ user.email }}</td>
-                                <td>
-                                    <button class="btn btn-sm role-btn">
-                                        {{ user.role.capitalize() }}
-                                    </button>
-                                </td>
-                                <td>
-                                    <button class="btn btn-danger btn-sm delete-btn">Delete</button>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
+    <table class="table table-hover text-center align-middle" id="usersTable">
+        <thead class="table-primary table-bordered position-sticky top-0">
+            <tr>
+                <th>SNo.</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.role}}</td>
+                <td>
+                    {% if user.role != 'admin' %}
+                    <button class="btn btn-sm btn-success make-admin-btn role-btn" style="width: 100px ;">
+                        Make Admin
+                    </button>
+                    {% else %}
+                    <button class="btn btn-sm btn-warning make-user-btn role-btn" style="width: 100px ;">
+                        Make User
+                    </button>
+                    {% endif %}
+                    <button class="btn btn-danger btn-sm delete-btn" style="width: 100px ;">Delete</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
             </div>
         </div>
     </div>
