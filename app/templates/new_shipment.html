@@ -66,14 +66,14 @@
             <a href="#" class="navbar-brand d-flex d-lg-none me-4">
                 <img src="static/img/Exafluence.jpg" alt="Exafluence" style="border-radius: 30%; width: 45px; height: 45px; margin-right: 10px;">
             </a>
-            <div class="navbar-nav align-items-center ms-auto">
+            <!-- <div class="navbar-nav align-items-center ms-auto">
                 <a href="/my_shipment" class="btn btn-outline-light text-decoration-none me-2">
                     <span class="d-none d-lg-inline-flex fw-bold">My Shipment</span>
                 </a>
                 <a href="/new_shipment" class="btn btn-outline-light text-decoration-none">
                     <span class="d-none d-lg-inline-flex fw-bold">New Shipment</span>
                 </a>
-            </div>
+            </div> -->
         </nav>
         <!-- Navbar End -->
 
@@ -138,11 +138,16 @@
                                             <input type="text" id="goodsType" name="goods_type" class="form-control" placeholder="Goods Type" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label>Expected Delivery Date</label>
-                                            <input type="date" name="expected_delivery_date" placeholder="Expected Delivery Date" required style="background-color: #fff; color: #000; border: 1px solid #ccc; padding: 8px; border-radius: 4px; appearance: none;">
-                                        </div>
+                                        <label>Expected Delivery Date</label>
+                                        <input type="date" 
+                                            name="expected_delivery_date" 
+                                            id="expectedDeliveryDate"
+                                            placeholder="Expected Delivery Date" 
+                                            required 
+                                            style="background-color: #fff; color: #000; border: 1px solid #ccc; padding: 8px; border-radius: 4px; appearance: none;">
+                                    </div>
                                         <div class="mb-3">
-                                            <label for="deliveryNumber" class="form-label">Delivery Number</label>
+                                            <label for="deliveryNumber" class="form-label">Delivery Number*</label>
                                             <input type="number" id="deliveryNumber" name="delivery_number" class="form-control" placeholder="Delivery Number" required>
                                         </div>
                                         <div class="mb-3">
@@ -158,8 +163,8 @@
 
                                 <!-- Buttons -->
                                 <div class="d-flex justify-content-between">
-                                    <button type="submit" class="btn btn-primary">Create Shipment</button>
-                                    <button type="reset" class="btn btn-danger">Clear Details</button>
+                                    <button type="submit" class="btn btn-light">Create Shipment</button>
+                                    <button type="reset" class="btn btn-light">Clear Details</button>
                                 </div>
                             </form>
                         </div>
