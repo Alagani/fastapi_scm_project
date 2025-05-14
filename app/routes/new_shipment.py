@@ -19,8 +19,8 @@ def create_shipment_get(request: Request, current_user: dict = Depends(get_curre
         users = users_data.find_one({'email': user_email})
         role = users.get("role")
         username = users.get("username")
-        today_date = datetime.now().strftime('%Y-%m-%d')
-        return templates.TemplateResponse('new_shipment.html', {'request': request, 'role': role, 'today_date': today_date,'username': username})
+        # today_date = datetime.now().strftime('%Y-%m-%d')
+        return templates.TemplateResponse('new_shipment.html', {'request': request, 'role': role, 'username': username})
     
     except Exception as e:
         print(f"Error in create_shipment_get route: {e}")
