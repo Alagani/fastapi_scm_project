@@ -9,3 +9,11 @@ setTimeout(() => {
         successMessage.style.display = 'none';
     }
 }, 3000);
+
+document.addEventListener('DOMContentLoaded', function() {
+    const dateInput = document.getElementById('expectedDeliveryDate');
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.setAttribute('min', today);
+    
+    
+});
