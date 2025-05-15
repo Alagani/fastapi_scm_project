@@ -26,7 +26,7 @@ class SocketServer:
         self.conn, self.addr = self.server.accept()
 
     def generate_data(self):
-        route = ['Newyork, USA', 'Chennai, India', 'Bengaluru, India', 'London, UK']
+        route = ['Mumbai','Chennai','Bengaluru']
         routefrom = random.choice(route)
         routeto = random.choice(route)
 
@@ -34,9 +34,9 @@ class SocketServer:
             return None
 
         data = {
-            "Battery_Level": round(random.uniform(2.00, 5.00), 2),
-            "Device_ID": random.randint(1150, 1158),
-            "First_Sensor_temperature": round(random.uniform(10, 40.0), 1),
+            "Battery_Level":random.randint(1, 100),
+            "Device_ID": random.randint(1151, 1153),
+            "First_Sensor_temperature": round(random.uniform(10, 40), 1),
             "Route_From": routefrom,
             "Route_To": routeto
         }
