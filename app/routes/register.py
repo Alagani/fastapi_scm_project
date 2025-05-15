@@ -1,16 +1,16 @@
 from fastapi import Request,Form
 from fastapi.templating import Jinja2Templates
-from database import users_data
+from app.database import users_data
 from fastapi.responses import RedirectResponse
 from fastapi import APIRouter
 from passlib.context import CryptContext
 import re
-from models import Users
+from app.models import Users
 
 router = APIRouter()
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-templates = Jinja2Templates(directory='templates')
+templates = Jinja2Templates(directory='app/templates')
 
 
 def get_hashed_password(password):

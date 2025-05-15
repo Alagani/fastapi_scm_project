@@ -1,11 +1,11 @@
 from fastapi import Request, Depends, APIRouter
 from fastapi.templating import Jinja2Templates
-from database import users_data, shipment_data
-from jwt_handler import get_current_user
-from cookie_handler import delete_access_token_cookie
+from app.database import users_data, shipment_data
+from app.jwt_handler import get_current_user
+from app.cookie_handler import delete_access_token_cookie
 
 router = APIRouter()
-templates = Jinja2Templates(directory='templates')
+templates = Jinja2Templates(directory='app/templates')
 
 
 @router.get('/my_shipment')

@@ -1,12 +1,12 @@
 from fastapi import Depends, Request, HTTPException
 from fastapi.templating import Jinja2Templates
-from jwt_handler import get_current_user
-from database import users_data
+from app.jwt_handler import get_current_user
+from app.database import users_data
 from fastapi import APIRouter
-from cookie_handler import delete_access_token_cookie
+from app.cookie_handler import delete_access_token_cookie
 
 router = APIRouter()
-templates = Jinja2Templates(directory='templates')
+templates = Jinja2Templates(directory='app/templates')
 
 @router.get('/users')
 def users(request: Request, current_user: dict = Depends(get_current_user)):
