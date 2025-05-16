@@ -17,3 +17,51 @@ document.addEventListener('DOMContentLoaded', function() {
     
     
 });
+document.addEventListener('DOMContentLoaded', function () {
+    const fields = [
+        { id: 'shipmentNumber', length: 7 },
+        { id: 'device_id', length: 4 },
+        { id: 'poNumber', length: 5 },
+        { id: 'ndcNumber', length: 3 },
+        { id: 'goods_number', length: 4 },
+        { id: 'containerNumber', length: 7 },
+        { id: 'deliveryNumber', length: 6 },
+        { id: 'batchNumber', length: 5 }
+    ];
+
+    fields.forEach(field => {
+        const inputElement = document.getElementById(field.id);
+        if (!inputElement) return;
+
+        inputElement.addEventListener('input', function () {
+            if (this.value.length > field.length) {
+                this.value = this.value.slice(0, field.length);
+            }
+        });
+    });
+
+    const form = document.querySelector('form[action="/new_shipment"]');
+    form.addEventListener('submit', function (event) {
+        let formIsValid = true;
+        let firstInvalidField = null;
+
+        fields.forEach(field => {
+            const inputElement = document.getElementById(field.id);
+            if (!inputElement) return;
+
+            if (inputElement.value.length !== field.length) {
+                formIsValid = false;
+                if (!firstInvalidField) {
+                    firstInvalidField = inputElement;
+                }
+            }
+        });
+
+        if (!formIsValid) {
+            event.preventDefault();
+            if (firstInvalidField) {
+                firstInvalidField.focus();
+            }
+        }
+    });
+});
