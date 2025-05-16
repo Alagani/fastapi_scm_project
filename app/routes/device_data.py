@@ -22,7 +22,7 @@ def devicedata(request:Request,current_user: dict = Depends(get_current_user)):
         role = user.get("role")
 
         if role != "admin":
-            return templates.TemplateResponse('404.html', {'request': request})
+            return templates.TemplateResponse('page_not_found.html', {'request': request})
         else:
             devices_cursor = device_data.find()
 
