@@ -5,11 +5,6 @@
     <meta charset="utf-8">
     <title>my shipment</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
-
-    <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
 
    <!-- Google Web Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet"> 
@@ -32,9 +27,8 @@
     </style>
 </head>
 
-<body>
+<body style="display: flex; min-height: 100vh; overflow: hidden;">
         <!-- Sidebar Start -->
-
         <div class="sidebar pe-4 pb-3 d-flex flex-column">
             <nav class="navbar  flex-grow-1 d-flex flex-column">
                 <a href="/dashboard" class="navbar-brand mx-4 mb-3 d-flex align-items-center">
@@ -50,8 +44,8 @@
                 </div>
                 <div class="navbar-nav w-100">
                     <a href="/dashboard" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-                    <a href="/my_shipment" class="nav-item nav-link active"><i class="fa fa-solid fa-truck me-2"></i>My Shipment</a>
-                    <a href="/new_shipment" class="nav-item nav-link"><i class="fa fa-solid fa-upload me-2"></i>New Shipment</a>
+                    <a href="/my_shipment" class="nav-item nav-link active"><i class="fa fa-solid fa-file me-2"></i>My Shipment</a>
+                    <a href="/new_shipment" class="nav-item nav-link"><i class="fa fa-solid fa-truck me-2"></i>New Shipment</a>
                     {% if role == 'admin' %}
                     <a href="/devicedata" class="nav-item nav-link"><i class="fa fa-database me-2"></i>Device Data</a>
                     <a href="/users" class="nav-item nav-link"><i class="fa fa-users me-2"></i>Users</a>
@@ -62,13 +56,10 @@
                 </div>
             </nav>
         </div>
-
         <!-- Sidebar End -->
 
-
         <!-- Content Start -->
-
-        <div class="content">
+        <div class="content d-flex flex-column" style="overflow-y: auto;">
            <!-- Navbar Start -->
            <nav class="navbar navbar-expand bg-white sticky-top px-4 py-0" style="height: 60px;">
             <a href="#" class="sidebar-toggler flex-shrink-0">
@@ -89,77 +80,72 @@
         <!-- Navbar End -->
 
             <!-- My Shipment Data Start -->
+            <div class="container-fluid pt-4 px-4 flex-grow-1">
+    <div class="row g-4 h-100">
+        <div class="col-12 bg-white d-flex flex-column h-100">
+            
+            <!-- Inner content box -->
+            <div class="p-4 flex-grow-1 d-flex flex-column h-100">
+                <h6 class="mb-4 text-center" style="color: #333; font-size: 1.5rem; font-weight: bold;">My Shipment Data</h6>
 
-            <div class="container-fluid pt-4 px-4">
-                <div class="row g-4">
-                    <div class="col-12 bg-white d-flex flex-column" style="height: 860px; border-radius: 20px;">
-                        <div class="p-4">
-                            <h6 class="mb-4 text-center" style="color: #333; font-size: 1.5rem; font-weight: bold;">My Shipment Data</h6>
-            
-                            <!-- Search -->
-                            <div class="mb-3">
-                                <input type="text" id="searchInput" class="form-control"
-                                    placeholder="Search by Shipment Details"
-                                    style="background-color: #ffff; border: 1px solid #000; font-size: 1rem; width: 50%; margin: 0 auto;">
-                            </div>
-            
-                            <!-- Table -->
-                            <div class="table-responsive flex-grow-1" style="max-height: 700px;">
-                                <table class="table table-hover table-bordered text-center align-middle mb-0">
-                                    <thead class="table-primary position-sticky top-0">
-                                        <tr>
-                                            <th>SNO.</th>
-                                            <th>Shipment Number</th>
-                                            <th>Route</th>
-                                            <th>Goods Type</th>
-                                            <th>Delivery Date</th>
-                                            <th>PO Number</th>
-                                            <th>NDC Number</th>
-                                            <th>Container Number</th>
-                                            <th>Delivery Number</th>
-                                            <th>Device ID</th>
-                                            <th>Goods Number</th>
-                                            <th>Batch ID</th>
-                                            <th>Shipment Description</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="shipmentTable">
-                                        {% for shipment in shipments %}
-                                        <tr>
-                                            <td>{{ loop.index }}</td>
-                                            <td>{{ shipment.shipment_number }}</td>
-                                            <td>{{ shipment.route }}</td>
-                                            <td>{{ shipment.goods_type }}</td>
-                                            <td>{{ shipment.expected_delivery_date }}</td>
-                                            <td>{{ shipment.po_number }}</td>
-                                            <td>{{ shipment.ndc_number }}</td>
-                                            <td>{{ shipment.container_number }}</td>
-                                            <td>{{ shipment.delivery_number }}</td>
-                                            <td>{{ shipment.device_id }}</td>
-                                            <td>{{ shipment.goods_number }}</td>
-                                            <td>{{ shipment.batch_id }}</td>
-                                            <td>{{ shipment.shipment_description }}</td>
-                                        </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-            
-                        <!-- Pagination stays at bottom -->
-                        <div id="pagination" class="text-center py-2 mt-auto"></div>
-                    </div>
+                <!-- Search -->
+                <div class="mb-3">
+                    <input type="text" id="searchInput" class="form-control"
+                        placeholder="Search by Shipment Details"
+                        style="background-color: #ffff; border: 1px solid #000; font-size: 1rem; width: 50%; margin: 0 auto;">
                 </div>
-            </div>
-            
 
-            <script src="static/js/my_shipment.js"></script>
-               
-            </script>
+                <!-- Table -->
+                <div class="table-responsive flex-grow-1" style="overflow-y: auto;">
+                    <table class="table table-hover table-bordered text-center align-middle mb-0">
+                        <thead class="table-primary position-sticky top-0">
+                            <tr>
+                                <th>SNO.</th>
+                                <th>Shipment Number</th>
+                                <th>Route</th>
+                                <th>Goods Type</th>
+                                <th>Delivery Date</th>
+                                <th>PO Number</th>
+                                <th>NDC Number</th>
+                                <th>Container Number</th>
+                                <th>Delivery Number</th>
+                                <th>Device ID</th>
+                                <th>Goods Number</th>
+                                <th>Batch ID</th>
+                                <th>Shipment Description</th>
+                            </tr>
+                        </thead>
+                        <tbody id="shipmentTable">
+                            {% for shipment in shipments %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ shipment.shipment_number }}</td>
+                                <td>{{ shipment.route }}</td>
+                                <td>{{ shipment.goods_type }}</td>
+                                <td>{{ shipment.expected_delivery_date }}</td>
+                                <td>{{ shipment.po_number }}</td>
+                                <td>{{ shipment.ndc_number }}</td>
+                                <td>{{ shipment.container_number }}</td>
+                                <td>{{ shipment.delivery_number }}</td>
+                                <td>{{ shipment.device_id }}</td>
+                                <td>{{ shipment.goods_number }}</td>
+                                <td>{{ shipment.batch_id }}</td>
+                                <td>{{ shipment.shipment_description }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Pagination -->
+            <div id="pagination" class="text-center py-1 mb-0"></div>
+            </div>
+        </div>
+    </div>
+</div>
             <!-- My Shipment Data End -->
             
+            <script src="static/js/my_shipment.js"></script>
     <!-- Template Javascript -->
     <script src="static/js/main.js"></script>
 </body>
-
 </html>
