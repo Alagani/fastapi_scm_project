@@ -47,7 +47,6 @@ class KafkaSocketProducer:
 
     def produce_message(self, message):
         """Produce a message to Kafka using pre-loaded topic"""
-        print(message)
         self.producer.produce(
             TOPIC,
             key="key",

@@ -46,13 +46,10 @@ class KafkaMongoConsumer:
                     continue
 
                 # Process valid message
-                json_str = msg.value().decode('utf-8')
-                document = json.loads(json_str)
-                print(document)
-                self.device_data.insert_one(document)
+                json_str = msg.value().decode('utf-8') # binary → string
+                document = json.loads(json_str) # string → dict
+                self.device_data.insert_one(document)  
                 
-            except json.JSONDecodeError:
-                continue
             except Exception:
                 continue
             finally:

@@ -5,8 +5,9 @@ def set_access_token_cookie(response: Response, access_token: str):
         key="access_token",
         value=f"Bearer {access_token}",
         httponly=True,
-        # secure=False
-        max_age=60 * 10
+        max_age=60*10,
+        samesite="Strict",
+        secure=False
     )
 
 def delete_access_token_cookie(response: Response):

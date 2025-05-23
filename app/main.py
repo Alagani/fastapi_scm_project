@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
-from app.routes import login,register, device_data, new_shipment, dashboard, users, my_shipment,logout
+from app.routes import login,register, device_data, new_shipment, dashboard, users, my_shipment,logout, forgot_password
 from fastapi.templating import Jinja2Templates
 
 app = FastAPI()
@@ -17,3 +17,4 @@ app.include_router(dashboard.router)
 app.include_router(new_shipment.router)
 app.include_router(my_shipment.router)
 app.include_router(logout.router)
+app.include_router(forgot_password.router)

@@ -91,7 +91,7 @@
                 <!-- Search -->
                 <div class="mb-3">
                     <input type="text" id="searchInput" class="form-control"
-                        placeholder="Search by Shipment Details"
+                        placeholder="Search by Shipment Number"
                         style="background-color: #ffff; border: 1px solid #000; font-size: 1rem; width: 50%; margin: 0 auto;">
                 </div>
 
@@ -101,6 +101,9 @@
                         <thead class="table-primary position-sticky top-0">
                             <tr>
                                 <th>SNO.</th>
+                                {% if role == 'admin' %}
+                                <th>Email</th>
+                                {% endif %}
                                 <th>Shipment Number</th>
                                 <th>Route</th>
                                 <th>Goods Type</th>
@@ -116,9 +119,13 @@
                             </tr>
                         </thead>
                         <tbody id="shipmentTable">
+
                             {% for shipment in shipments %}
                             <tr>
                                 <td>{{ loop.index }}</td>
+                                {% if role == 'admin' %}
+                                <td>{{shipment.user_id }}</td>
+                                {% endif %}
                                 <td>{{ shipment.shipment_number }}</td>
                                 <td>{{ shipment.route }}</td>
                                 <td>{{ shipment.goods_type }}</td>
@@ -133,8 +140,12 @@
                                 <td>{{ shipment.shipment_description }}</td>
                             </tr>
                             {% endfor %}
+
                         </tbody>
                     </table>
+                    <p id="noResultsMessage" class="text-center my-3 text-muted" style="display: none;">
+    No shipments found matching the shipment number.
+</p>
                 </div>
                 <!-- Pagination -->
             <div id="pagination" class="text-center py-1 mb-0"></div>

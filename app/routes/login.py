@@ -15,8 +15,6 @@ def verify_password(plain_password, hashed_password):
     return pwd_context.verify(plain_password, hashed_password)
 
 
-
-
 @router.get("/login")
 def login(request:Request):
     return templates.TemplateResponse("login.html", {
@@ -36,14 +34,14 @@ def login_post(
         if not user:
             return templates.TemplateResponse("login.html", {
                 "request": request,
-                "message": "Invalid email or password."
+                "message": "User doesn't exist."
             })
 
         # --- Verify password ---
         if not verify_password(password, user["password"]):
             return templates.TemplateResponse("login.html", {
                 "request": request,
-                "message": "Invalid email or password."
+                "message": "Incorrect Password."
             })
 
         access_token = create_access_token(
@@ -58,7 +56,7 @@ def login_post(
         return response
 
     except Exception as e:
-        print("error:", str(e))
+        print("error:", e)
         return templates.TemplateResponse("login.html", {
         "request": request,
         "message": "An unexpected error occurred. Please try again later."

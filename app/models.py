@@ -10,14 +10,14 @@ class Users(BaseModel):
 
 
 class Shipment(BaseModel):
-    shipment_number: int 
+    shipment_number: int
     container_number: int
-    goods_number: int 
+    goods_number: int
     route: str
     goods_type: str
-    device_id: int 
+    device_id: int
     expected_delivery_date:str
-    po_number:int 
+    po_number:int
     delivery_number:int
     ndc_number:int
     batch_id:int

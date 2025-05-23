@@ -13,36 +13,52 @@ document.addEventListener("DOMContentLoaded", function () {
     // Calculate how many rows to display per page based on sidebar state
     function calculateRowsPerPage() {
         const isSidebarHidden = sidebar.classList.contains("open") || getComputedStyle(sidebar).marginLeft === "-250px";
-        return isSidebarHidden ? 15 : 10; // Show more rows when sidebar is hidden
+        return isSidebarHidden ? 9 : 8; // Show more rows when sidebar is hidden
     }
 
-    // Filter table rows based on search input
-    function getFilteredRows() {
-        const filter = searchInput.value.toLowerCase();
-        return Array.from(shipmentTable.querySelectorAll("tr")).filter(row => {
-            return row.textContent.toLowerCase().includes(filter);
-        });
-    }
+    // Filter table rows based on shipment number only
+function getFilteredRows() {
+    const filter = searchInput.value.toLowerCase();
+    return Array.from(shipmentTable.querySelectorAll("tr")).filter(row => {
+        const cells = row.getElementsByTagName("td");
+        if (cells.length >= 3) { // Ensure there is a Shipment Number cell
+            const shipmentNumber = cells[2].textContent.toLowerCase();
+            return shipmentNumber.includes(filter);
+        }
+        return false;
+    });
+}
+
 
     // Display rows for the current page
     function displayRows(page) {
-        const allRows = shipmentTable.querySelectorAll("tr");
-        const filteredRows = getFilteredRows();
+    const allRows = shipmentTable.querySelectorAll("tr");
+    const filteredRows = getFilteredRows();
 
-        // Hide all rows initially
-        allRows.forEach(row => row.style.display = "none");
+    // Hide all rows initially
+    allRows.forEach(row => row.style.display = "none");
 
-        // Calculate start and end indices for current page
-        const start = (page - 1) * rowsPerPage;
-        const end = start + rowsPerPage;
+    // Show or hide the 'no results' message
+    const noResultsMessage = document.getElementById("noResultsMessage");
+    if (filteredRows.length === 0) {
+        noResultsMessage.style.display = "block";
+        pagination.style.display = "none";
+        return;
+    } else {
+        noResultsMessage.style.display = "none";
+        pagination.style.display = "";
+    }
 
-        // Show only the rows for the current page
-        filteredRows.forEach((row, index) => {
-            if (index >= start && index < end) {
-                row.style.display = "";
-            }
-        });
+    // Calculate start and end indices for current page
+    const start = (page - 1) * rowsPerPage;
+    const end = start + rowsPerPage;
 
+    // Show only the rows for the current page
+    filteredRows.forEach((row, index) => {
+        if (index >= start && index < end) {
+            row.style.display = "";
+        }
+    });
         // Scroll to top of table on new search or page click
         document.querySelector(".table-responsive").scrollTop = 0;
     }
@@ -105,11 +121,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }, 300);
         });
     }
-
-    // 🔄 Event: Window Resize
-    window.addEventListener("resize", () => {
-        initPagination(); // Recalculate on window resize
-    });
 
     // Initial Run - set up pagination when page loads
     initPagination();

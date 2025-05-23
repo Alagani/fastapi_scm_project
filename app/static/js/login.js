@@ -1,3 +1,15 @@
+// Hide the error message after 2 seconds
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+        const errorMessage = document.getElementById('errorMessage');
+        if (errorMessage) {
+            errorMessage.style.display = 'none';
+        }
+    }, 2000);
+});
+
+
+
 // Generate a random CAPTCHA code
 function generateCaptcha() {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -23,12 +35,3 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
 // Generate CAPTCHA on page load
 window.onload = generateCaptcha;
 
-// Hide the error message after 3 seconds
-document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => {
-        const errorMessage = document.getElementById('errorMessage');
-        if (errorMessage) {
-            errorMessage.style.display = 'none';
-        }
-    }, 2000);
-});

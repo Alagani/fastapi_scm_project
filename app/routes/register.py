@@ -93,7 +93,7 @@ def register_user(
         )
 
 
-        users_data.insert_one(user_doc.dict())
+        users_data.insert_one(user_doc.model_dump())
 
 
         # Redirect to login page on success

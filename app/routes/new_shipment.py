@@ -19,7 +19,6 @@ def create_shipment_get(request: Request, current_user: dict = Depends(get_curre
         users = users_data.find_one({'email': user_email})
         role = users.get("role")
         username = users.get("username")
-        # today_date = datetime.now().strftime('%Y-%m-%d')
         return templates.TemplateResponse('new_shipment.html', {'request': request, 'role': role, 'username': username})
     
     except Exception as e:
@@ -32,6 +31,7 @@ def create_shipment_get(request: Request, current_user: dict = Depends(get_curre
 @router.post('/new_shipment')
 def create_shipment_post(
     request: Request, current_user: dict = Depends(get_current_user),
+
     shipment_number: int = Form(...),
     route: str = Form(...),
     device_id: int = Form(...),
@@ -45,6 +45,8 @@ def create_shipment_post(
     batch_id: int = Form(...),
     shipment_description: str = Form(...)
 ):
+    
+
     try:
         user_email = current_user['email']
         user = users_data.find_one({'email': user_email})
@@ -88,7 +90,7 @@ def create_shipment_post(
             created_at=datetime.now()
         )
 
-        result = shipment_data.insert_one(shipment_doc.dict())
+        result = shipment_data.insert_one(shipment_doc.model_dump())
 
         if not result.inserted_id:
             return templates.TemplateResponse(

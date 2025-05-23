@@ -1,5 +1,4 @@
 import socket
-import errno
 import json
 import time
 import random
@@ -53,11 +52,7 @@ class SocketServer:
 
                     userdata = json.dumps(data, indent=1).encode(self.FORMAT)
                     self.conn.send(userdata)
-                    time.sleep(10)
-
-            except IOError as e:
-                if e.errno == errno.EPIPE:
-                    break
+                    time.sleep(30)
             except Exception:
                 break
 
