@@ -1,7 +1,6 @@
 from fastapi import Request,Form
 from fastapi.templating import Jinja2Templates
 from app.database import users_data
-from fastapi.responses import RedirectResponse
 from fastapi import APIRouter
 from passlib.context import CryptContext
 import re
@@ -96,8 +95,10 @@ def register_user(
         users_data.insert_one(user_doc.model_dump())
 
 
-        # Redirect to login page on success
-        return RedirectResponse(url="/login", status_code=303)
+        return templates.TemplateResponse("login.html", {
+            "request": request,
+            "success": "Registered Successful."
+        })
 
 
     except Exception as e:

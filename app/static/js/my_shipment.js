@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Calculate how many rows to display per page based on sidebar state
     function calculateRowsPerPage() {
         const isSidebarHidden = sidebar.classList.contains("open") || getComputedStyle(sidebar).marginLeft === "-250px";
-        return isSidebarHidden ? 9 : 8; // Show more rows when sidebar is hidden
+        return isSidebarHidden ? 10 : 8; // Show more rows when sidebar is hidden
     }
 
     // Filter table rows based on shipment number only
@@ -21,13 +21,15 @@ function getFilteredRows() {
     const filter = searchInput.value.toLowerCase();
     return Array.from(shipmentTable.querySelectorAll("tr")).filter(row => {
         const cells = row.getElementsByTagName("td");
-        if (cells.length >= 3) { // Ensure there is a Shipment Number cell
-            const shipmentNumber = cells[2].textContent.toLowerCase();
-            return shipmentNumber.includes(filter);
+        if (cells.length >= 13) {
+            const shipmentNumber1 = cells[1].textContent.toLowerCase();
+            const shipmentNumber2 = cells[2].textContent.toLowerCase();
+            return shipmentNumber1.includes(filter) || shipmentNumber2.includes(filter);
         }
         return false;
     });
 }
+
 
 
     // Display rows for the current page

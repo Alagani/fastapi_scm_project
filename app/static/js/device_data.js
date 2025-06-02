@@ -1,35 +1,42 @@
+/**
+ * MAIN FILTER EVENT HANDLER
+ * Handles device filtering when "Get Data" button is clicked.
+ * Filters table rows based on selected device ID and refreshes pagination.
+ */
 document.getElementById("getDataBtn").addEventListener("click", function() {
     const selectedDeviceId = document.getElementById("deviceSelect").value;
     const allRows = Array.from(document.querySelectorAll("#deviceDataTable tbody tr"));
     let visibleRows = [];
 
-    // Filter rows based on selection
     allRows.forEach(row => {
         const cellValue = row.cells[0].textContent.trim();
         if (!selectedDeviceId || cellValue === selectedDeviceId) {
             visibleRows.push(row);
         }
-        row.style.display = "none"; // Hide all initially
+        row.style.display = "none";
     });
 
-    // Update pagination and show first page
     updatePagination(visibleRows);
     displayPage(1, visibleRows);
 });
 
-// Pagination functions
+// Global variable to store currently visible rows for pagination navigation
 let currentVisibleRows = [];
 
+/**
+ * PAGINATION DISPLAY FUNCTION
+ * Displays a specific page of rows (14 rows per page).
+ * Hides all rows, then shows only those belonging to the requested page.
+ * Updates pagination button styling to highlight the current page.
+ */
 function displayPage(page, visibleRows) {
     currentVisibleRows = visibleRows;
     const rowsPerPage = 14;
     const start = (page - 1) * rowsPerPage;
     const end = start + rowsPerPage;
 
-    // Hide all rows first
     currentVisibleRows.forEach(row => row.style.display = "none");
     
-    // Show only current page rows
     currentVisibleRows.slice(start, end).forEach(row => {
         row.style.display = "";
     });
@@ -37,6 +44,12 @@ function displayPage(page, visibleRows) {
     setActiveButton(page);
 }
 
+/**
+ * PAGINATION BUTTON GENERATOR
+ * Creates numbered pagination buttons based on total visible rows.
+ * Calculates required pages (14 rows per page) and generates clickable buttons.
+ * Each button triggers displayPage() when clicked.
+ */
 function createPaginationButtons(visibleRows) {
     const paginationContainer = document.getElementById("pagination");
     paginationContainer.innerHTML = "";
@@ -51,10 +64,20 @@ function createPaginationButtons(visibleRows) {
     }
 }
 
+/**
+ * PAGINATION UPDATE WRAPPER
+ * Simple wrapper function that calls createPaginationButtons().
+ * Used to refresh pagination controls when data changes.
+ */
 function updatePagination(visibleRows) {
     createPaginationButtons(visibleRows);
 }
 
+/**
+ * PAGINATION BUTTON STYLING
+ * Updates visual styling of pagination buttons to highlight the active page.
+ * Active button gets solid styling, inactive buttons get outline styling.
+ */
 function setActiveButton(activePage) {
     const buttons = document.querySelectorAll("#pagination button");
     buttons.forEach(btn => {
@@ -64,7 +87,11 @@ function setActiveButton(activePage) {
     });
 }
 
-// Initialize
+/**
+ * INITIALIZATION
+ * Sets up the table when the page loads.
+ * Creates initial pagination for all rows and displays the first page.
+ */
 document.addEventListener("DOMContentLoaded", function() {
     const rows = Array.from(document.querySelectorAll("#deviceDataTable tbody tr"));
     updatePagination(rows);

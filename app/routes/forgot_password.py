@@ -1,12 +1,13 @@
 from fastapi import Request,Form
 from fastapi.templating import Jinja2Templates
 from app.database import users_data
-from passlib.context import CryptContext
+# from passlib.context import CryptContext
+from app.routes.register import get_hashed_password
 from fastapi import APIRouter
 import re
 
 router = APIRouter()
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+# pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 templates = Jinja2Templates(directory='app/templates')
 
 
@@ -78,7 +79,7 @@ def handle_password_reset(
         
             
             # Update password in database
-            hashed_password = pwd_context.hash(password)
+            hashed_password = get_hashed_password(password)
             users_data.update_one(
                 {"email": email},
                 {"$set": {"password": hashed_password}}
@@ -86,7 +87,7 @@ def handle_password_reset(
 
             return templates.TemplateResponse("login.html", {
                     "request": request,
-                    "message": "Password changed successfully."
+                    "success": "Password changed successfully."
                 })
 
 

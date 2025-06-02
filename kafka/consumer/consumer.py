@@ -1,13 +1,13 @@
-from confluent_kafka import Consumer, KafkaError
+from confluent_kafka import Consumer
 import pymongo
 import json
 import os
 from dotenv import load_dotenv
 
-# Load environment variables once at module level
-load_dotenv(dotenv_path=".env")
+# Load environment variables
+load_dotenv()
 
-# Assign environment variables to constants
+# Assign environment variables
 MONGODB_URI = os.getenv("MONGODB_URI")
 MONGODB_DATABASE = os.getenv("MONGODB_DATABASE")
 BOOTSTRAP_SERVERS = os.getenv("bootstrap_servers")
@@ -18,14 +18,19 @@ class KafkaMongoConsumer:
     def __init__(self):
         # MongoDB setup
         self.client = pymongo.MongoClient(MONGODB_URI)
+
         self.db = self.client[MONGODB_DATABASE]
+
         self.device_data = self.db["device_data"]
 
         # Consumer configuration
         self.conf = {
             'bootstrap.servers': BOOTSTRAP_SERVERS,
-            "group.id": "my-consumer-group"
+            'group.id': 'my-consumer-group',
+            'enable.auto.commit': True,
+            'auto.commit.interval.ms': 5000     # Automatically commit offsets to every 5 seconds
         }
+
 
         self.consumer = Consumer(self.conf)
         self.consumer.subscribe([TOPIC])
@@ -35,25 +40,23 @@ class KafkaMongoConsumer:
     def process_messages(self):
         while True:
             try:
+
+
                 msg = self.consumer.poll(1.0)
                 
                 if msg is None:
                     continue
                     
-                if msg.error():
-                    if msg.error().code() == KafkaError._PARTITION_EOF:
-                        continue
+                elif msg.error():
                     continue
 
-                # Process valid message
-                json_str = msg.value().decode('utf-8') # binary → string
-                document = json.loads(json_str) # string → dict
-                self.device_data.insert_one(document)  
-                
+                json_str = msg.value().decode('utf-8')     # Convert binary Kafka message to JSON string
+                document = json.loads(json_str)            # Convert JSON string to Python dictionary
+                self.device_data.insert_one(document)
+
+
             except Exception:
                 continue
-            finally:
-                self.consumer.commit()
 
 
     def close_consumer(self):

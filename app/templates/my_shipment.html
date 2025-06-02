@@ -82,7 +82,7 @@
             <!-- My Shipment Data Start -->
             <div class="container-fluid pt-4 px-4 flex-grow-1">
     <div class="row g-4 h-100">
-        <div class="col-12 bg-white d-flex flex-column h-100">
+        <div class="col-12 bg-white d-flex flex-column"style="height: 820px;">
             
             <!-- Inner content box -->
             <div class="p-4 flex-grow-1 d-flex flex-column h-100">
@@ -90,10 +90,15 @@
 
                 <!-- Search -->
                 <div class="mb-3">
-                    <input type="text" id="searchInput" class="form-control"
-                        placeholder="Search by Shipment Number"
-                        style="background-color: #ffff; border: 1px solid #000; font-size: 1rem; width: 50%; margin: 0 auto;">
-                </div>
+    <input type="text" id="searchInput" class="form-control"
+        {% if role == 'admin' %}
+            placeholder="Search by Shipment Number or Email"
+        {% else %}
+            placeholder="Search by Shipment Number"
+        {% endif %}
+        style="background-color: #ffff; border: 1px solid #000; font-size: 1rem; width: 50%; margin: 0 auto;">
+</div>
+
 
                 <!-- Table -->
                 <div class="table-responsive flex-grow-1" style="overflow-y: auto;">
@@ -144,7 +149,7 @@
                         </tbody>
                     </table>
                     <p id="noResultsMessage" class="text-center my-3 text-muted" style="display: none;">
-    No shipments found matching the shipment number.
+    No shipments found.
 </p>
                 </div>
                 <!-- Pagination -->

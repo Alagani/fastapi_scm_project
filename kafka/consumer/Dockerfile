@@ -4,10 +4,7 @@ FROM python:3.12-slim
 # Set the working directory inside the container
 WORKDIR /kafka/consumer
 
-# Install required Python packages globally
-# - confluent-kafka: Kafka client for Python
-# - pymongo: MongoDB driver
-# - python-dotenv: To load environment variables from a .env file
+# Install required Python packages
 RUN pip install confluent-kafka pymongo python-dotenv
 
 # Copy all project files from the host into the working directory in the container

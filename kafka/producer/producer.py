@@ -3,10 +3,10 @@ from confluent_kafka import Producer
 import os
 from dotenv import load_dotenv
 
-# Load environment variables once at module level
+# Load environment variables
 load_dotenv()
 
-# Assign environment variables to module-level constants
+# Assign environment variables
 BOOTSTRAP_SERVERS = os.getenv('bootstrap_servers')
 HOST = os.getenv('host')
 PORT = int(os.getenv('port'))
@@ -15,15 +15,20 @@ TOPIC = os.getenv('topic')
 class KafkaSocketProducer:
 
     def __init__(self):
-        # Kafka configuration using pre-loaded env vars
+        # Kafka configuration
         self.producer_config = {
             'bootstrap.servers': BOOTSTRAP_SERVERS
         }
         self.producer = Producer(self.producer_config)
         
         # Socket configuration
+
+        # Create a TCP socket using IPv4 addressing
         self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+        # Set a timeout of 5 seconds for blocking socket operations (like recv)
         self.server.settimeout(5)
+
 
 
 
@@ -40,7 +45,7 @@ class KafkaSocketProducer:
             return message if message else None
         except socket.timeout:
             return None
-        except (ConnectionResetError, Exception):
+        except Exception:
             return False  # Signal connection error
 
 
@@ -49,7 +54,6 @@ class KafkaSocketProducer:
         """Produce a message to Kafka using pre-loaded topic"""
         self.producer.produce(
             TOPIC,
-            key="key",
             value=message
         )
         self.producer.poll(0.1)

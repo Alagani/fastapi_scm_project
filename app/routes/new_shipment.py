@@ -43,7 +43,7 @@ def create_shipment_post(
     expected_delivery_date: str = Form(...),
     delivery_number: int = Form(...),
     batch_id: int = Form(...),
-    shipment_description: str = Form(...)
+    shipment_description: str = Form(None)
 ):
     
 

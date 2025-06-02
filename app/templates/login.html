@@ -26,6 +26,10 @@
                                             <div id="errorMessage" class="alert alert-danger" role="alert">
                                                 {{ message }}
                                             </div>
+                                            {% elif success %}
+                                                <div id="errorMessage" class="alert alert-warning" role="alert">
+                                                {{ success }}
+                                                </div>
                                             {% endif %}
                                         </div>
                                         <div class="mb-3">

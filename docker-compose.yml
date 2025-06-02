@@ -10,23 +10,25 @@ services:
     image: apache/kafka:latest
     environment:
       KAFKA_NODE_ID: 1
-      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_PROCESS_ROLES: broker,controller # KRaft Mode
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
       KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
-      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093 # Single Broker
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     depends_on:
       - scm_project
 
   server:
-    image: jaga9989/scm_project:scm_server
+    # image: jaga9989/scm_project:scm_server
+    build: kafka/server
     depends_on:
       - kafka
 
   producer:
-    image: jaga9989/scm_project:scm_producer
+    # image: jaga9989/scm_project:scm_producer
+    build: kafka/producer
     depends_on:
       - server
       # - kafka
@@ -34,7 +36,8 @@ services:
       - host
 
   consumer:
-    image: jaga9989/scm_project:scm_consumer
+    # image: jaga9989/scm_project:scm_consumer
+    build: kafka/consumer
     depends_on:
       - producer
       # - kafka

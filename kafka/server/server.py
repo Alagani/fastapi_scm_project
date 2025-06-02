@@ -6,20 +6,25 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()  # Load .env variables
-PORT = int(os.getenv("Port"))  # Assign before class, can override via constructor
+PORT = int(os.getenv("Port"))
 
 class SocketServer:
 
     def __init__(self,port):
         self.PORT = port
-        self.SERVER = socket.gethostbyname(socket.gethostname())
-        self.ADDR = ("", self.PORT)
-        self.FORMAT = 'utf-8'
-        self.DISCONNECT_MESSAGE = "!DISCONNECT"
 
+        self.ADDR = ("", self.PORT)
+
+        self.FORMAT = 'utf-8'
+
+        # Create a TCP socket using IPv4 addressing
         self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+
         self.server.bind(self.ADDR)
-        self.server.listen(2)
+
+        # Start listening for incoming client connection(producer)
+        self.server.listen(1)
 
     def accept_connection(self):
         self.conn, self.addr = self.server.accept()
@@ -50,9 +55,11 @@ class SocketServer:
                     if not data:
                         continue
 
+                    # Convert the data dictionary to a JSON-formatted string, then encode it to bytes using UTF-8 for transmission
                     userdata = json.dumps(data, indent=1).encode(self.FORMAT)
+
                     self.conn.send(userdata)
-                    time.sleep(30)
+                    time.sleep(20)
             except Exception:
                 break
 

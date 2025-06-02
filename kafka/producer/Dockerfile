@@ -5,8 +5,6 @@ FROM python:3.12-slim
 WORKDIR /kafka/producer
 
 # Install required Python packages
-# - python-dotenv: for loading environment variables from a .env file
-# - confluent-kafka: Kafka client for producing messages
 RUN pip install python-dotenv confluent-kafka
 
 # Copy all files from the local project directory to the container

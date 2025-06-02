@@ -5,7 +5,6 @@ FROM python:3.12-slim
 WORKDIR /kafka/server
 
 # Install required Python packages
-# - python-dotenv: for loading environment variables from .env
 RUN pip install python-dotenv
 
 # Copy all project files into the container
