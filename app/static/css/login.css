@@ -1,0 +1,20 @@
+body {
+    background-color: #E6F3FF;
+}
+.card {
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.captcha-text {
+    font-weight: bold;
+    font-size: 18px;
+    background-color: #e9ecef;
+    padding: 5px 10px;
+    border-radius: 5px;
+    white-space: nowrap;
+}
+.side-image {
+    border-radius: 15px;
+    object-fit: cover;
+    height: 100%;
+}
