@@ -2,7 +2,7 @@
 services:
 
   scm_project:
-    image: jaga9989/scm_project:scm_master
+    image: jaga9989/scm_project:app
     ports:
       - "8000:8000"
 
@@ -21,23 +21,21 @@ services:
       - scm_project
 
   server:
-    # image: jaga9989/scm_project:scm_server
-    build: kafka/server
+    image: jaga9989/scm_project:server
     depends_on:
       - kafka
 
   producer:
-    # image: jaga9989/scm_project:scm_producer
-    build: kafka/producer
+    image: jaga9989/scm_project:producer
     depends_on:
       - server
-      # - kafka
+      - kafka
     environment:
-      - host
+      - host=server
 
   consumer:
-    # image: jaga9989/scm_project:scm_consumer
-    build: kafka/consumer
+    image: jaga9989/scm_project:consumer
     depends_on:
       - producer
-      # - kafka
+      - server
+      - kafka 

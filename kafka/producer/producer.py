@@ -56,7 +56,7 @@ class KafkaSocketProducer:
             TOPIC,
             value=message
         )
-        self.producer.poll(0.1)
+        self.producer.poll(1.0)
 
 
 
