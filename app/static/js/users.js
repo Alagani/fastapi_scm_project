@@ -43,6 +43,7 @@ document.querySelectorAll('.delete-btn').forEach(button => {
     });
 });
 
+// Update functionality
 function attachRoleToggleListeners() {
     document.querySelectorAll('.role-btn').forEach(button => {
         button.addEventListener('click', async function () {

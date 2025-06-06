@@ -10,6 +10,7 @@ setTimeout(() => {
     }
 }, 3000);
 
+// hiding previous dates
 document.addEventListener('DOMContentLoaded', function() {
     const dateInput = document.getElementById('expectedDeliveryDate');
     const today = new Date().toISOString().split('T')[0];
@@ -17,6 +18,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     
 });
+
+// validating form input's length and strict
 document.addEventListener('DOMContentLoaded', function () {
     const fields = [
         { id: 'shipmentNumber', length: 7 },

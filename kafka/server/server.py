@@ -59,7 +59,7 @@ class SocketServer:
                     userdata = json.dumps(data, indent=1).encode(self.FORMAT)
 
                     self.conn.send(userdata)
-                    time.sleep(20)
+                    time.sleep(100)
             except Exception:
                 break
 
