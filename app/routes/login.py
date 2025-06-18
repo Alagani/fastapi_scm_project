@@ -24,7 +24,7 @@ def login(request:Request):
             
 
 @router.post("/login")
-def login_post(
+def submit_login(
     request: Request,
     email: str = Form(...),
     password: str = Form(...)

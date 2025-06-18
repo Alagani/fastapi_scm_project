@@ -9,7 +9,7 @@ templates = Jinja2Templates(directory='app/templates')
 
 
 @router.get('/my_shipment')
-def my_shipment(request: Request, current_user: dict = Depends(get_current_user)):
+def get_all_shipments(request: Request, current_user: dict = Depends(get_current_user)):
     try:
         user_email = current_user["email"]
         user = users_data.find_one({"email": user_email})

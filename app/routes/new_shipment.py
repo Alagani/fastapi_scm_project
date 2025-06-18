@@ -12,7 +12,7 @@ templates = Jinja2Templates(directory='app/templates')
 
 
 @router.get('/new_shipment')
-def create_shipment_get(request: Request, current_user: dict = Depends(get_current_user)):
+def get_new_shipment(request: Request, current_user: dict = Depends(get_current_user)):
     try:
 
         user_email = current_user['email']
@@ -29,7 +29,7 @@ def create_shipment_get(request: Request, current_user: dict = Depends(get_curre
 
 
 @router.post('/new_shipment')
-def create_shipment_post(
+def submit_new_shipment(
     request: Request, current_user: dict = Depends(get_current_user),
 
     shipment_number: int = Form(...),

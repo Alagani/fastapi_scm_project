@@ -9,7 +9,7 @@ router = APIRouter()
 templates = Jinja2Templates(directory='app/templates')
 
 @router.get('/users')
-def users(request: Request, current_user: dict = Depends(get_current_user)):
+def get_all_users(request: Request, current_user: dict = Depends(get_current_user)):
     try:
 
         user_email = current_user.get("email")
