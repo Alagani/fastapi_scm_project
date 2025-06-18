@@ -10,7 +10,7 @@ router = APIRouter()
 templates = Jinja2Templates(directory='app/templates')
 
 @router.get('/devicedata')
-def devicedata(request:Request,current_user: dict = Depends(get_current_user)):
+def get_all_devicedata(request:Request,current_user: dict = Depends(get_current_user)):
     try:
 
         user_email = current_user["email"]
